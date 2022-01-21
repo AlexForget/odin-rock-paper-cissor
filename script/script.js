@@ -21,26 +21,50 @@ function userPlay() {
   return userPlay;
 }
 
-// Determiner le gagnant d'une round de roche papier cisseau
-function playARound(userPlay, computerPlay) {
-  let result;
-
+// Determiner le gagnant d'une round de roche papier scisseau
+function playARound(userPlay, computerPlay, score) {
   if (computerPlay === "rock" && userPlay === "scissor") {
-    result = `You lose! ${computerPlay} beat ${userPlay}`;
+    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
+    score -= 1;
   } else if (computerPlay === "rock" && userPlay === "paper") {
-    result = `You win! ${userPlay} beat ${computerPlay}`;
+    console.log(`You win! ${userPlay} beat ${computerPlay}`);
+    score += 1;
   } else if (computerPlay === "paper" && userPlay === "scissor") {
-    result = `You win! ${userPlay} beat ${computerPlay}`;
+    console.log(`You win! ${userPlay} beat ${computerPlay}`);
+    score += 1;
   } else if (computerPlay === "paper" && userPlay === "rock") {
-    result = `You lose! ${computerPlay} beat ${userPlay}`;
+    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
+    score -= 1;
   } else if (computerPlay === "scissor" && userPlay === "paper") {
-    result = `You lose! ${computerPlay} beat ${userPlay}`;
+    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
+    score -= 1;
   } else if (computerPlay === "scissor" && userPlay === "rock") {
-    result = `You win! ${userPlay} beat ${computerPlay}`;
+    console.log(`You win! ${userPlay} beat ${computerPlay}`);
+    score += 1;
   } else {
-    result = `It's a tie! ${computerPlay} equal ${userPlay}`;
+    console.log(`It's a tie! ${computerPlay} equal ${userPlay}`);
   }
-  return result;
+
+  return score;
 }
 
-console.log(playARound(userPlay(), computerPlay()));
+// Compléter une partie de roche papier scisseau de 5 round
+function game() {
+  let userChoice;
+  let computerChoice;
+  let score = 0;
+
+  for (let i = 1; i < 6; i++) {
+    score = playARound(userPlay(), computerPlay(), score);
+  }
+
+  if (score > 0) {
+    console.log("You won the mach!!!");
+  } else if (score < 0) {
+    console.log("You lose the match...");
+  } else {
+    console.log("It's a tie.");
+  }
+}
+
+game();
