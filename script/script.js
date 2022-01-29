@@ -6,6 +6,8 @@ const btnList = document.querySelectorAll("button");
 const result = document.querySelector("#result");
 const score = document.querySelector("#score");
 
+score.setAttribute("style", "white-space: pre;");
+
 // Déterminer de façon aléatoire le choix de l'ordinateur
 let computerPlay = () => {
   let computerChoice = ["rock", "paper", "scissor"];
@@ -40,7 +42,21 @@ let playARound = (userPlay, computerPlay) => {
     result.textContent = `It's a tie! ${computerPlay} equal ${userPlay}`;
   }
 
-  score.textContent = `Player : ${playerScore}\nComputer : ${computerScore}`;
+  score.textContent = `Player : ${playerScore}\r\nComputer : ${computerScore}`;
+  if (playerScore === 5) {
+    checkEndgame("Player");
+  }
+  if (computerScore === 5) {
+    checkEndgame("Computer");
+  }
+};
+
+// Mettre fin à la partie quand un joueur atteind le score de 5
+let checkEndgame = (winner) => {
+  score.textContent += `\r\n\r\n${winner} as won the game`;
+  btnList.forEach((btn) => {
+    btn.disabled = true;
+  });
 };
 
 /* ----- VERSION 2 ----- */
