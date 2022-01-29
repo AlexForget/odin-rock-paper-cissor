@@ -1,3 +1,11 @@
+/* ----- DÉCLARATION DES VARIABLES ----- */
+
+let playerScore = 0;
+let computerScore = 0;
+const btnList = document.querySelectorAll("button");
+const result = document.querySelector("#result");
+const score = document.querySelector("#score");
+
 // Déterminer de façon aléatoire le choix de l'ordinateur
 let computerPlay = () => {
   let computerChoice = ["rock", "paper", "scissor"];
@@ -8,62 +16,40 @@ let computerPlay = () => {
 // Retourner un nombre aléatoire entre 1 et 3 inclusiement
 let getRandomNumber = () => Math.floor(Math.random() * 3 + 1);
 
-// Enregistrer le choix du joueur
-let userPlay = () => {
-  let userPlay = prompt("Faite votre choix").toLowerCase();
-
-  while (userPlay != "rock" && userPlay != "paper" && userPlay != "scissor") {
-    userPlay = prompt("Choix invalide! \nFaite votre choix").toLowerCase();
-  }
-
-  return userPlay;
-};
-
-// Determiner le gagnant d'une round de roche papier scisseau
-let playARound = (userPlay, computerPlay, score) => {
+// Determiner le gagnant d'une round de roche papier scisseau et calculer le score
+let playARound = (userPlay, computerPlay) => {
   if (computerPlay == "rock" && userPlay == "scissor") {
-    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
-    score -= 1;
+    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+    computerScore++;
   } else if (computerPlay == "rock" && userPlay == "paper") {
-    console.log(`You win! ${userPlay} beat ${computerPlay}`);
-    score += 1;
+    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+    playerScore++;
   } else if (computerPlay == "paper" && userPlay == "scissor") {
-    console.log(`You win! ${userPlay} beat ${computerPlay}`);
-    score += 1;
+    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+    playerScore++;
   } else if (computerPlay == "paper" && userPlay == "rock") {
-    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
-    score -= 1;
+    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+    computerScore++;
   } else if (computerPlay == "scissor" && userPlay == "paper") {
-    console.log(`You lose! ${computerPlay} beat ${userPlay}`);
-    score -= 1;
+    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+    computerScore++;
   } else if (computerPlay == "scissor" && userPlay == "rock") {
-    console.log(`You win! ${userPlay} beat ${computerPlay}`);
-    score += 1;
+    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+    playerScore++;
   } else {
-    console.log(`It's a tie! ${computerPlay} equal ${userPlay}`);
+    result.textContent = `It's a tie! ${computerPlay} equal ${userPlay}`;
   }
 
-  //return score;
+  score.textContent = `Player : ${playerScore}\nComputer : ${computerScore}`;
 };
 
-// Compléter une partie de roche papier scisseau de 5 round
-let game = () => {
-  let score = 0;
+/* ----- VERSION 2 ----- */
 
-  for (let i = 1; i < 6; i++) {
-    score = playARound(userPlay(), computerPlay(), score);
-  }
-
-  if (score > 0) {
-    console.log("You won the mach!!!");
-  } else if (score < 0) {
-    console.log("You lose the match...");
-  } else {
-    console.log("It's a tie.");
-  }
-};
-
-/*   AJOUT POUR PORTION UI     */
+btnList.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    playARound(btn.value, computerPlay());
+  });
+});
 
 /* ----- VERSION 1 ----- */
 
@@ -83,13 +69,3 @@ btnPaper.addEventListener("click", function () {
 btnScissor.addEventListener("click", function () {
   playARound("scissor", computerPlay(), 0);
 });*/
-
-/* ----- VERSION 2 ----- */
-
-const btnList = document.querySelectorAll("button");
-
-btnList.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    playARound(btn.value, computerPlay(), 0);
-  });
-});
