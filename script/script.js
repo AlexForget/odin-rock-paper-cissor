@@ -8,15 +8,28 @@ const score = document.querySelector("#score");
 
 score.setAttribute("style", "white-space: pre;");
 
+/* ----- EVENTLISTENER ----- */
+
+btnList.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    playARound(btn.value, computerPlay());
+  });
+});
+
 // Déterminer de façon aléatoire le choix de l'ordinateur
 let computerPlay = () => {
   let computerChoice = ["rock", "paper", "scissor"];
-  let indexAleatoire = getRandomNumber() - 1;
+  let indexAleatoire = Math.floor(Math.random() * 3 + 1) - 1;
   return computerChoice[indexAleatoire];
 };
 
-// Retourner un nombre aléatoire entre 1 et 3 inclusiement
-let getRandomNumber = () => Math.floor(Math.random() * 3 + 1);
+// Mettre fin à la partie quand un joueur atteind le score de 5
+let checkEndgame = (winner) => {
+  score.textContent += `\r\n\r\n${winner} as won the game`;
+  btnList.forEach((btn) => {
+    btn.disabled = true;
+  });
+};
 
 // Determiner le gagnant d'une round de roche papier scisseau et calculer le score
 let playARound = (userPlay, computerPlay) => {
@@ -50,38 +63,3 @@ let playARound = (userPlay, computerPlay) => {
     checkEndgame("Computer");
   }
 };
-
-// Mettre fin à la partie quand un joueur atteind le score de 5
-let checkEndgame = (winner) => {
-  score.textContent += `\r\n\r\n${winner} as won the game`;
-  btnList.forEach((btn) => {
-    btn.disabled = true;
-  });
-};
-
-/* ----- VERSION 2 ----- */
-
-btnList.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    playARound(btn.value, computerPlay());
-  });
-});
-
-/* ----- VERSION 1 ----- */
-
-/*
-const btnRock = document.querySelector("#rock");
-const btnPaper = document.querySelector("#paper");
-const btnScissor = document.querySelector("#scissor");
-
-btnRock.addEventListener("click", function (e) {
-  playARound("rock", computerPlay(), 0);
-});
-
-btnPaper.addEventListener("click", function () {
-  playARound("rock", computerPlay(), 0);
-});
-
-btnScissor.addEventListener("click", function () {
-  playARound("scissor", computerPlay(), 0);
-});*/
