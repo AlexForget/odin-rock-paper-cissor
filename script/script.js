@@ -21,29 +21,29 @@ let userPlay = () => {
 
 // Determiner le gagnant d'une round de roche papier scisseau
 let playARound = (userPlay, computerPlay, score) => {
-  if (computerPlay === "rock" && userPlay === "scissor") {
+  if (computerPlay == "rock" && userPlay == "scissor") {
     console.log(`You lose! ${computerPlay} beat ${userPlay}`);
     score -= 1;
-  } else if (computerPlay === "rock" && userPlay === "paper") {
+  } else if (computerPlay == "rock" && userPlay == "paper") {
     console.log(`You win! ${userPlay} beat ${computerPlay}`);
     score += 1;
-  } else if (computerPlay === "paper" && userPlay === "scissor") {
+  } else if (computerPlay == "paper" && userPlay == "scissor") {
     console.log(`You win! ${userPlay} beat ${computerPlay}`);
     score += 1;
-  } else if (computerPlay === "paper" && userPlay === "rock") {
+  } else if (computerPlay == "paper" && userPlay == "rock") {
     console.log(`You lose! ${computerPlay} beat ${userPlay}`);
     score -= 1;
-  } else if (computerPlay === "scissor" && userPlay === "paper") {
+  } else if (computerPlay == "scissor" && userPlay == "paper") {
     console.log(`You lose! ${computerPlay} beat ${userPlay}`);
     score -= 1;
-  } else if (computerPlay === "scissor" && userPlay === "rock") {
+  } else if (computerPlay == "scissor" && userPlay == "rock") {
     console.log(`You win! ${userPlay} beat ${computerPlay}`);
     score += 1;
   } else {
     console.log(`It's a tie! ${computerPlay} equal ${userPlay}`);
   }
 
-  return score;
+  //return score;
 };
 
 // Compléter une partie de roche papier scisseau de 5 round
@@ -63,4 +63,33 @@ let game = () => {
   }
 };
 
-game();
+/*   AJOUT POUR PORTION UI     */
+
+/* ----- VERSION 1 ----- */
+
+/*
+const btnRock = document.querySelector("#rock");
+const btnPaper = document.querySelector("#paper");
+const btnScissor = document.querySelector("#scissor");
+
+btnRock.addEventListener("click", function (e) {
+  playARound("rock", computerPlay(), 0);
+});
+
+btnPaper.addEventListener("click", function () {
+  playARound("rock", computerPlay(), 0);
+});
+
+btnScissor.addEventListener("click", function () {
+  playARound("scissor", computerPlay(), 0);
+});*/
+
+/* ----- VERSION 2 ----- */
+
+const btnList = document.querySelectorAll("button");
+
+btnList.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    playARound(btn.value, computerPlay(), 0);
+  });
+});
