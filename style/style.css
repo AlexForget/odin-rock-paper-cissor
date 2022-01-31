@@ -1,0 +1,59 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* HEADER */
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: goldenrod;
+}
+
+header ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+}
+header ul li {
+  padding: 0px 5px;
+}
+
+/* BOUTON DE SÉLECTION */
+
+main {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+  background-color: antiquewhite;
+}
+
+main button {
+  padding: 0;
+  margin: 0 30px;
+}
+
+/* SECTION RESULT */
+
+#result {
+  background-color: orange;
+  flex: 2;
+  overflow: auto;
+}
+
+/* SECTION SCORE */
+
+#score {
+  background-color: rebeccapurple;
+  flex: 1;
+  overflow: auto;
+}
+
+/* FOOTER */
+
+footer {
+  background-color: goldenrod;
+  margin-left: auto;
+}
