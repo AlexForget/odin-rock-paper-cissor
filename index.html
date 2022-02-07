@@ -18,7 +18,7 @@
             <li>SCISSOR</li>
         </ul>
     </header>
-    <main>
+    <main id="main">
         <button value="rock"><img src="images/fist.png" alt="A fist as a rock"></button>
         <button value="paper"><img src="images/paper.png" alt="Two piece of paper"></button>
         <button value="scissor"><img src="images/scissors.png" alt="A pair of scissor"/></button>
@@ -26,15 +26,22 @@
 
     <section id="score">
         <div id="affichage-score">
-            <div>
-                Computer choice : 
-            </div>
-            <button ><img src="images/scissors.png" alt="A pair of scissor"/></button>
-            <div>
+            <div id="round-counter">
                 Round : 0
             </div>
             <div>
-                Player : 0           Computer : 0
+                Computer choice : 
+            </div>
+            <button ><img id="computer-choice" src="images/scissors.png" alt="A pair of scissor"/></button>
+            
+            <div id="player-score">
+                Player : 0
+            </div>
+            <div id="computer-score">
+                Computer : 0
+            </div>
+            <div id="final-result">
+
             </div>
         </div>
     </section>
