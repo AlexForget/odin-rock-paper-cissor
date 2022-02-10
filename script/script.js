@@ -11,11 +11,22 @@ const roundCounter = document.querySelector("#round-counter");
 const playerScoreDiv = document.querySelector("#player-score");
 const computerScoreDiv = document.querySelector("#computer-score");
 const finalResult = document.querySelector("#final-result");
-const imgComputerChoice = document.querySelector("#computer-choice");
+const imgComputerChoice = document.querySelector("#computer-choice-img");
+const computerChoice = document.querySelector("#computer-choice");
+const roundResult = document.querySelector("#round-result");
 
 const score = document.querySelector("#score");
 
 score.setAttribute("style", "white-space: pre;");
+
+/* ----- LOADING INITIAL ----- */
+
+window.onload = (e) => {
+  roundCounter.textContent = `Round : ${round}`;
+  playerScoreDiv.textContent = `Joueur : ${playerScore}`;
+  computerScoreDiv.textContent = `Ordinateur : ${computerScore}`;
+  computerChoice.textContent = `Choix de l'ordinateur :`;
+};
 
 /* ----- EVENTLISTENER ----- */
 
@@ -31,27 +42,27 @@ btnList.forEach((btn) => {
 
 // Modifier l'image de la sélection du computer selon le choix aléatoire
 let computerChoiceImg = (choice) => {
-  if (choice === "paper") {
-    document.querySelector("#computer-choice").src = "images/paper.png";
+  if (choice === "papier") {
+    document.querySelector("#computer-choice-img").src = "images/paper.png";
   }
-  if (choice === "scissor") {
-    document.querySelector("#computer-choice").src = "images/scissors.png";
+  if (choice === "ciseau") {
+    document.querySelector("#computer-choice-img").src = "images/scissors.png";
   }
-  if (choice === "rock") {
-    document.querySelector("#computer-choice").src = "images/fist.png";
+  if (choice === "roche") {
+    document.querySelector("#computer-choice-img").src = "images/fist.png";
   }
 };
 
 // Déterminer de façon aléatoire le choix de l'ordinateur
 let computerPlay = () => {
-  let computerChoice = ["rock", "paper", "scissor"];
+  let computerChoice = ["roche", "papier", "ciseau"];
   let indexAleatoire = Math.floor(Math.random() * 3 + 1) - 1;
   return computerChoice[indexAleatoire];
 };
 
 // Mettre fin à la partie quand un joueur atteind le score de 5
 let checkEndgame = (winner) => {
-  finalResult.textContent += `\r\n\r\n${winner} as won the game`;
+  finalResult.textContent = `${winner} a gagné la partie`;
   btnList.forEach((btn) => {
     btn.disabled = true;
   });
@@ -60,26 +71,26 @@ let checkEndgame = (winner) => {
 // Determiner le gagnant d'une round de roche papier scisseau et calculer le score
 let playARound = (userPlay, computerPlay) => {
   round++;
-  if (computerPlay == "rock" && userPlay == "scissor") {
-    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+  if (computerPlay == "roche" && userPlay == "ciseau") {
+    roundResult.textContent = `Vous avez perdu! ${computerPlay} bat ${userPlay}`;
     computerScore++;
-  } else if (computerPlay == "rock" && userPlay == "paper") {
-    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+  } else if (computerPlay == "roche" && userPlay == "papier") {
+    roundResult.textContent = `Vous avez gagné! ${userPlay} bat ${computerPlay}`;
     playerScore++;
-  } else if (computerPlay == "paper" && userPlay == "scissor") {
-    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+  } else if (computerPlay == "papier" && userPlay == "ciseau") {
+    roundResult.textContent = `Vous avez gagné! ${userPlay} bat ${computerPlay}`;
     playerScore++;
-  } else if (computerPlay == "paper" && userPlay == "rock") {
-    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+  } else if (computerPlay == "papier" && userPlay == "roche") {
+    roundResult.textContent = `Vous avez perdu! ${computerPlay} bat ${userPlay}`;
     computerScore++;
-  } else if (computerPlay == "scissor" && userPlay == "paper") {
-    result.textContent = `You lose! ${computerPlay} beat ${userPlay}`;
+  } else if (computerPlay == "ciseau" && userPlay == "papier") {
+    roundResult.textContent = `Vous avez perdu! ${computerPlay} bat ${userPlay}`;
     computerScore++;
-  } else if (computerPlay == "scissor" && userPlay == "rock") {
-    result.textContent = `You win! ${userPlay} beat ${computerPlay}`;
+  } else if (computerPlay == "ciseau" && userPlay == "roche") {
+    roundResult.textContent = `Vous avez gagné! ${userPlay} bat ${computerPlay}`;
     playerScore++;
   } else {
-    result.textContent = `It's a tie! ${computerPlay} equal ${userPlay}`;
+    roundResult.textContent = `Round nulle! ${computerPlay} égal ${userPlay}`;
   }
 
   UpdateScoreAndRound();
@@ -95,6 +106,6 @@ let playARound = (userPlay, computerPlay) => {
 // Mettre à jour l'affichage de la round et des scores
 let UpdateScoreAndRound = () => {
   roundCounter.textContent = `Round : ${round}`;
-  playerScoreDiv.textContent = `Player : ${playerScore}`;
-  computerScoreDiv.textContent = `Computer : ${computerScore}`;
+  playerScoreDiv.textContent = `Joueur : ${playerScore}`;
+  computerScoreDiv.textContent = `Ordinateur : ${computerScore}`;
 };
